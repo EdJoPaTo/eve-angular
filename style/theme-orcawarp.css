@@ -1,10 +1,11 @@
 @media (min-width:768px) {
   body {
-    background-image: url(//eve.3t0.de/res/orcawarp_compressed.png);
+    background-image: url(/resources/backgrounds/orcawarp.png);
   }
 }
 
 /*
+ * https://en.wikipedia.org/wiki/Shades_of_brown
  * Raw Umber (130, 102, 68)
  * Amber (255, 191, 0)
  */
@@ -14,7 +15,7 @@ h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
 }
 
 .navbar-inverse .navbar-nav > li > a:hover {
-  background-color: rgb(130, 102, 68);
+  background-color: rgb(255, 191, 0);
 }
 
 a:hover {
