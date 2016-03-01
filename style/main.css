@@ -9,8 +9,6 @@ body {
 
 .container {
   padding-top: 20px;
-  background-color: rgba(10,10,10, 0.6);
-  box-shadow: 0px 0px 5px 5px rgba(10,10,10, 0.6);
 }
 
 .footer {
