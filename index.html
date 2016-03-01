@@ -13,6 +13,7 @@
   <script src="js/app.js"></script>
   <script src="js/routes.js"></script>
   <script src="js/controller/NavBarCtrl.js"></script>
+  <script src="js/directives/navbarButton.js"></script>
   <title>EVE</title>
 </head>
 <body>
@@ -28,11 +29,13 @@
       </div>
       <div class="collapse navbar-collapse" ng-class="{in: open}">
         <ul class="nav navbar-nav">
-          <li ng-class="{active:currentUrl === '/legal'}"><a href="#/legal">Home</a></li>
-          <li ng-class="{active:currentUrl === '/impressum'}"><a href="#/impressum">Page 1</a></li>
+          <li navbar-button url="/mining" text="Mining"></li>
+          <li navbar-button url="/legal" text="Page 1"></li>
+          <li navbar-button url="/impressum" text="Page 2"></li>
+          <li navbar-button url="/about" text="Page 3"></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ng-class="{active:currentUrl === '/'}"><a href="#/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li navbar-button url="/login" text="Login" glyphicon="glyphicon-log-in"></li>
         </ul>
       </div>
     </div>
