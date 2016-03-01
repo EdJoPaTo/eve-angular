@@ -63,3 +63,12 @@ a:hover {
   color: rgb(0, 168, 107);
   filter: drop-shadow(0px 0px 5px rgb(0, 168, 107));
 }
+
+input[type="number"] {
+  background-color: transparent;
+  border: 1px solid #303030;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
+}
