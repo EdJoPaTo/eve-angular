@@ -2,23 +2,23 @@
   body {
     background-image: url(/resources/backgrounds/orcawarp.png);
   }
-}
 
-/*
- * https://en.wikipedia.org/wiki/Shades_of_brown
- * Raw Umber (130, 102, 68)
- * Amber (255, 191, 0)
- */
+  /*
+   * https://en.wikipedia.org/wiki/Shades_of_brown
+   * Raw Umber (130, 102, 68)
+   * Amber (255, 191, 0)
+   */
 
-h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
-  color: rgb(130, 102, 68);
-}
+  h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
+    color: rgb(130, 102, 68);
+  }
 
-.navbar-inverse .navbar-nav > li > a:hover {
-  background-color: rgb(255, 191, 0);
-}
+  .navbar-inverse .navbar-nav > li > a:hover {
+    background-color: rgb(255, 191, 0);
+  }
 
-a:hover {
-  color: rgb(255, 191, 0);
-  filter: drop-shadow(0px 0px 5px rgb(255, 191, 0));
+  a:hover {
+    color: rgb(255, 191, 0);
+    filter: drop-shadow(0px 0px 5px rgb(255, 191, 0));
+  }
 }
