@@ -1,5 +1,18 @@
 <link rel="stylesheet" href="style/theme-orcawarp.css"/>
 
-Wir minern heute. Vielleicht.
+<input type="search" ng-model="filter">
 
-<mineral-table></mineral-table>
+<mineral-table pricetype="pricetype" kind="kind" filter="filter" editmode="editmode"></mineral-table>
+
+<select ng-model="pricetype">
+  <option value="buy">Accept Buy Order</option>
+  <option value="sell">Place Sell Order</option>
+</select><br>
+<select ng-model="kind">
+  <option value="ore">Ore</option>
+  <option value="ice">Ice</option>
+  <option value="gas">Gas Clouds</option>
+  <option value="whgas">Unknown Space Gas Clouds</option>
+  <option value="all">All of it!</option>
+</select><br>
+<input type="checkbox" ng-model="editmode"> Show Custom Calculations<br>

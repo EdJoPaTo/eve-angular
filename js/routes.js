@@ -4,7 +4,8 @@ angular.module("eve")
   .when('/', {
     templateUrl: 'templates/pages/main.html'
   })
-  .when('/mining', { templateUrl: 'templates/pages/mining.html' })
+  .when('/mining', { redirectTo: '/mining/ore/sell' })
+  .when('/mining/:kind/:pricetype', { templateUrl: 'templates/pages/mining.html', controller: 'miningCtrl' })
   .when('/impressum', { templateUrl: 'templates/pages/impressum.html' })
   .when('/legal', { templateUrl: 'templates/pages/legal.html' })
   .when('/about', { templateUrl: 'templates/pages/about.html' })

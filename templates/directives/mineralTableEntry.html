@@ -1,4 +1,15 @@
-<td>Tritanium ({{itemId}})</td>
-<td><input type="number" ng-model="amount" min="1" max="10000000" step="1" style="width: 100%;"></td>
-<td>{{ 12.50 * amount }}</td>
-<td>12,70</td>
+<th style="background-image: url({{ icon(item.id) }});" class="icon-background">
+  {{ item.name }}
+</th>
+<td ng-show="editmode">
+  <input type="number" ng-model="amount" min="1" max="10000000" step="1">
+</td>
+<td ng-class="{success: isMax(prices[region.id]), danger: isMin(prices[region.id])}" class="text-right" ng-repeat="region in regions">
+  {{ prices[region.id] * amount | number : 2 }}
+</td>
+<td ng-show="editmode">
+  <input type="number" ng-model="ownPrice" min="0.01" max="10000000" step="0.01">
+</td>
+<td ng-class="{success: isMax(ownPrice), danger: isMin(ownPrice)}" ng-show="editmode">
+  {{ ownPrice * amount | number : 2 }}
+</td>

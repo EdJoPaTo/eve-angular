@@ -1,1 +1,1 @@
-angular.module("eve", ['ngRoute']);
+angular.module("eve", ['ngRoute', 'eve-crest']);

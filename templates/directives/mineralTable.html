@@ -1,17 +1,16 @@
-<table class="table">
+<div class="table-responsive">
+<table class="table table-condensed">
   <thead>
     <tr>
       <th>Typ</th>
-      <th style="max-width: 200px;">Menge</th>
-      <th>Jita</th>
-      <th>Amarr</th>
-      <th>Jita</th>
-      <th>Amarr</th>
-      <th>Jita</th>
-      <th>Amarr</th>
+      <th ng-show="editmode" class="text-right">Amount</th>
+      <th ng-repeat="region in regions" class="text-right">{{ region.name }}</th>
+      <th ng-show="editmode" class="text-right">Own Price</th>
+      <th ng-show="editmode" class="text-right"> * Amount</th>
     </tr>
   </thead>
   <tbody>
-    <tr mineral-table-entry ng-repeat="id in [32, 33, 34]" item-id="id"></tr>
+    <tr mineral-table-entry ng-repeat="mineral in minerals | filter: filter" pricetype="pricetype" item="mineral" regions="regions" editmode="editmode"></tr>
   </tbody>
 </table>
+</div>
