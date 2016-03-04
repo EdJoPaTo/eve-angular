@@ -1,5 +1,4 @@
 {
-  "directory": "public/bower_components",
   "ignoredDependencies": [
     "jquery"
   ]
