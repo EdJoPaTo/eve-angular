@@ -1,0 +1,17 @@
+.navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  transition {
+    property: background-color;
+    duration: 0.5s;
+    timing-function: ease;
+    delay: 0s;
+  }
+}
+
+.navbar-inverse .navbar-nav > .active > a:hover {
+  filter: none;
+}

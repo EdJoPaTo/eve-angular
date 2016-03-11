@@ -3,16 +3,19 @@
     background-image: url(/resources/backgrounds/confessorwarp.png);
   }
 
+  $basecolor: #8b644b;
+  $highlightcolor: #e7e4b8;
+
   h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
-    color: #8b644b;
+    color: $basecolor;
   }
 
   .navbar-inverse .navbar-nav > li > a:hover {
-    background-color: #e7e4b8;
+    background-color: $highlightcolor;
   }
 
   a:hover {
-    color: #e7e4b8;
-    filter: drop-shadow(0px 0px 5px #e7e4b8);
+    color: $highlightcolor;
+    filter: drop-shadow(0px 0px 5px $highlightcolor);
   }
 }

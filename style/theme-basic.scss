@@ -1,0 +1,19 @@
+/* Other Themes will override this */
+/*
+ * https://en.wikipedia.org/wiki/Shades_of_green
+ * Jade (0, 168, 107)
+ */
+$basecolor: rgb(0, 168, 107);
+
+h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
+  color: $basecolor;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  background-color: $basecolor;
+}
+
+a:hover {
+  color: $basecolor;
+  filter:drop-shadow(0px 0px 5px $basecolor);
+}

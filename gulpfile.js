@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var cleanCSS = require('gulp-clean-css');
+var sass = require('gulp-sass');
 
 var buildtargetjs = "public/js/";
 var buildtargetstyle = "public/style/"
@@ -25,11 +25,11 @@ paths.scripts = [
 ];
 
 paths.styles = [
-  'style/*.css'
+  'style/*.scss'
 ];
 
 paths.stylethemes = [
-  'style/theme/*.css'
+  'style/theme/*.scss'
 ];
 
 gulp.task('connect', function () {
@@ -61,12 +61,16 @@ gulp.task('styles-init', function () {
   gulp.src(paths.styles)
     .pipe(sourcemaps.init())
     .pipe(concat('styles.min.css'))
-    .pipe(cleanCSS())
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }).on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(buildtargetstyle));
   gulp.src(paths.stylethemes)
     .pipe(sourcemaps.init())
-    .pipe(cleanCSS())
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }).on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(buildtargetstyletheme));
 });
