@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
@@ -42,16 +43,20 @@ gulp.task('angular-init', function () {
 
 gulp.task('scripts-init', function () {
   gulp.src(paths.scripts)
+    .pipe(sourcemaps.init())
     .pipe(concat('scripts.min.js'))
     .pipe(uglify({
       mangle: false
     }))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(buildtargetjs));
 });
 
 gulp.task('styles-init', function () {
   gulp.src(paths.styles)
+    .pipe(sourcemaps.init())
     .pipe(cleanCSS())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(buildtargetstyle));
 });
 
