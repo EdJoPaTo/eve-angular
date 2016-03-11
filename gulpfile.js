@@ -80,7 +80,7 @@ gulp.task('watch', function () {
   watch(paths.scripts, function () {
     gulp.start('scripts-init');
   });
-  watch(paths.styles, function () {
+  watch('style/**/*.scss', function () {
     gulp.start('styles-init');
   });
   watch(paths.all, function () {
