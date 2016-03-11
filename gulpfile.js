@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var connect = require('gulp-connect');
-var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
@@ -29,6 +27,7 @@ paths.styles = [
 ];
 
 gulp.task('connect', function () {
+  var connect = require('gulp-connect');
   connect.server({
     root: 'public',
     livereload: true
@@ -57,6 +56,7 @@ gulp.task('styles-init', function () {
 });
 
 gulp.task('watch', function () {
+  var watch = require('gulp-watch');
   watch(paths.scripts, function () {
     gulp.start('scripts-init');
   });
@@ -64,6 +64,7 @@ gulp.task('watch', function () {
     gulp.start('styles-init');
   });
   watch(paths.all, function () {
+    var connect = require('gulp-connect');
     gulp.src(paths.all)
       .pipe(connect.reload());
   });
