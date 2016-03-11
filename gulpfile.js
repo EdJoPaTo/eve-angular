@@ -6,6 +6,7 @@ var cleanCSS = require('gulp-clean-css');
 
 var buildtargetjs = "public/js/";
 var buildtargetstyle = "public/style/"
+var buildtargetstyletheme = "public/style/theme"
 
 var paths = {};
 
@@ -25,6 +26,10 @@ paths.scripts = [
 
 paths.styles = [
   'style/*.css'
+];
+
+paths.stylethemes = [
+  'style/theme/*.css'
 ];
 
 gulp.task('connect', function () {
@@ -55,9 +60,15 @@ gulp.task('scripts-init', function () {
 gulp.task('styles-init', function () {
   gulp.src(paths.styles)
     .pipe(sourcemaps.init())
+    .pipe(concat('styles.min.css'))
     .pipe(cleanCSS())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(buildtargetstyle));
+  gulp.src(paths.stylethemes)
+    .pipe(sourcemaps.init())
+    .pipe(cleanCSS())
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(buildtargetstyletheme));
 });
 
 gulp.task('watch', function () {
