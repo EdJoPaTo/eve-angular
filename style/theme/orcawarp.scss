@@ -7,17 +7,20 @@
    * https://en.wikipedia.org/wiki/Shades_of_brown
    * Raw Umber (130, 102, 68)
    * Amber (255, 191, 0)
+   * Chocolate (123, 63, 0)
    */
 
   $basecolor: rgb(130, 102, 68);
   $highlightcolor: rgb(255, 191, 0);
+  $highlightinvertcolor: rgb(123, 63, 0);
 
   h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
     color: $basecolor;
   }
 
-  .navbar-inverse .navbar-nav > li > a:hover {
+  .navbar a:hover {
     background-color: $highlightcolor;
+    color: $highlightinvertcolor;
   }
 
   a:hover {

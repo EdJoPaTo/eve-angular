@@ -11,7 +11,6 @@
   <meta name="apple-mobile-web-app-title" content="EVE Tools">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="style/styles.min.css" />
   <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
@@ -25,10 +24,10 @@
   <meta name="keywords" content="eve online, tool, mining, ice, ore, veldspar, pyroxeres, price, prices, calculation, helper">
 </head>
 <body>
-  <nav class="navbar navbar-inverse" ng-controller="NavBarCtrl">
+  <nav class="navbar" ng-controller="NavBarCtrl">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" ng-click="open = !open">
+        <button type="button" class="navbar-toggle" ng-class="{open: open}" ng-click="open = !open">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>

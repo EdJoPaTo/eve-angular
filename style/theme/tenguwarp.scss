@@ -5,13 +5,15 @@
 
   $basecolor: #536e94;
   $highlightcolor: #66b5ff;
+  $highlightinvertcolor: darkblue;
 
   h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
     color: $basecolor;
   }
 
-  .navbar-inverse .navbar-nav > li > a:hover {
+  .navbar a:hover {
     background-color: $highlightcolor;
+    color: $highlightinvertcolor;
   }
 
   a:hover {
