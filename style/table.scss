@@ -1,4 +1,5 @@
-.table > tbody > tr > th.icon-background, .table > tbody > tr > td.icon-background {
+.table > tbody > tr > th.icon-background,
+.table > tbody > tr > td.icon-background {
   background: {
     size: contain;
     repeat: no-repeat;
@@ -9,20 +10,51 @@
 
 .table-condensed {
   white-space: nowrap;
+
+  td,
+  th {
+    padding: 5px;
+  }
+}
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+  }
+
+  thead tr {
+    border-bottom: 1px solid white;
+  }
+
+  tbody tr {
+    border-top: 1px solid white;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    margin: -5px;
+  }
+
+  tr.success > td,
+  tr.success > th,
+  td.success,
+  th.success {
+    background-color: rgba(0, 255, 0, 0.2);
+  }
+
+  tr.danger > td,
+  tr.danger > th,
+  td.danger,
+  th.danger {
+    background-color: rgba(255, 0, 0, 0.2);
+  }
 }
 
 .table-responsive {
   border: 0;
-}
-
-.table input[type="number"] {
-  width: 100%;
-}
-
-.table>tbody>tr.success>td, .table>tbody>tr.success>th, .table>tbody>tr>td.success, .table>tbody>tr>th.success, .table>tfoot>tr.success>td, .table>tfoot>tr.success>th, .table>tfoot>tr>td.success, .table>tfoot>tr>th.success, .table>thead>tr.success>td, .table>thead>tr.success>th, .table>thead>tr>td.success, .table>thead>tr>th.success {
-  background-color: rgba(0, 255, 0, 0.2);
-}
-
-.table>tbody>tr.danger>td, .table>tbody>tr.danger>th, .table>tbody>tr>td.danger, .table>tbody>tr>th.danger, .table>tfoot>tr.danger>td, .table>tfoot>tr.danger>th, .table>tfoot>tr>td.danger, .table>tfoot>tr>th.danger, .table>thead>tr.danger>td, .table>thead>tr.danger>th, .table>thead>tr>td.danger, .table>thead>tr>th.danger {
-  background-color: rgba(255, 0, 0, 0.2);
 }
