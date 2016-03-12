@@ -1,0 +1,17 @@
+<div id="iteminfo">
+  <h1>Item Info</h1>
+  <input type="text" placeholder="Search for an item..." ng-model="q" autocorrect="off" autocapitalize="off" autocomplete="off" tabindex="1" autofocus />
+  <div class="row">
+    <div class="col-sm-4">
+      <div ng-repeat="item in items | filter: q | limitTo: 40" ng-click="selectitem(item)">
+        <a href ng-click="selectitem(item)">
+          <strong>{{item.type.name}}</strong> {{item.id}}
+        </a>
+        <br />
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <item-info-full item="currentTypeInfo"></item-info-full>
+    </div>
+  </div>
+</div>
