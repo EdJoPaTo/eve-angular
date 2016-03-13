@@ -85,7 +85,7 @@ gulp.task( 'styles-init', function() {
 
 gulp.task( 'watch', function() {
   var watch = require( 'gulp-watch' );
-  watch( 'js/**/*.*', function() {
+  watch( 'modules/**/*.*', function() {
     gulp.start( 'scripts-init' );
   } );
   watch( 'style/**/*.*', function() {
