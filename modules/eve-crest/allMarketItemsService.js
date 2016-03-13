@@ -7,13 +7,13 @@ angular.module( 'eve-crest' )
         }, requestErrorHandler );
 
       function requestHandler( request ) {
-        if ( request.data.next && request.data.next.href ) {
+        var finished = !Boolean( request.data.next && request.data.next.href );
+
+        if ( !finished ) {
           getFromUrl( request.data.next.href );
-        } else {
-          console.log( 'all items cached' );
         }
 
-        callback( request.data.items, !Boolean(request.data.next && request.data.next.href)  );
+        callback( request.data.items, finished );
       }
 
       function requestErrorHandler( request ) {
