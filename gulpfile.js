@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
@@ -32,6 +34,19 @@ paths.stylethemes = [
   'style/theme/*.scss'
 ];
 
+// https://www.timroes.de/2015/01/06/proper-error-handling-in-gulp-js/
+var gulp_src = gulp.src;
+gulp.src = function() {
+  return gulp_src.apply(gulp, arguments)
+    .pipe(plumber(function(error) {
+      // Output an error message
+      gutil.log(gutil.colors.red('Error (' + error.plugin + '): ' + error.message));
+      // emit the end event, to properly end the task
+      this.emit('end');
+    })
+  );
+};
+
 gulp.task('connect', function () {
   var connect = require('gulp-connect');
   connect.server({
@@ -49,6 +64,9 @@ gulp.task('angular-init', function () {
 gulp.task('scripts-init', function () {
   gulp.src(paths.scripts)
     .pipe(sourcemaps.init())
+    .pipe(uglify({
+      mangle: false
+    }))
     .pipe(concat('scripts.min.js'))
     .pipe(uglify({
       mangle: false
