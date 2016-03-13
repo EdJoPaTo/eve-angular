@@ -18,6 +18,7 @@ angular.module( 'eve' )
 
     $scope.getTypeInfo = function( item ) {
       typeInfoService( item.id ).then( function( typeInfo ) {
+        if ( !$scope.currentitem ) return;
         if ( typeInfo.id != $scope.currentitem.id ) return;
         $scope.currentTypeInfo = typeInfo;
       } )
