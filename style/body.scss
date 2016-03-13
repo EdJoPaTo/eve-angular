@@ -30,3 +30,13 @@ body {
     box-shadow: 0 0 5px 5px rgba(10,10,10, 0.6);
   }
 }
+
+div[ng-view] {
+  position: relative;
+}
+
+.top-right-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

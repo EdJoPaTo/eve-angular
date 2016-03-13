@@ -1,11 +1,15 @@
 angular.module( 'eve' )
   .controller( 'ItemInfoCtrl', function( $scope, $filter, allMarketItemsService, typeInfoService ) {
     $scope.items = [];
+    $scope.stillloading = true;
     $scope.currentitem = {};
     $scope.currentTypeInfo = {};
 
-    allMarketItemsService( function( items ) {
+    allMarketItemsService( function( items, finished ) {
       $scope.items = $scope.items.concat( items );
+      $scope.stillloading = !finished;
+    }, function( e ) {
+      $scope.error = e;
     } );
 
     $scope.selectitem = function( item ) {

@@ -1,13 +1,10 @@
 angular.module( 'eve-crest' )
   .factory( 'allMarketItemsService', function allMarketItemsFactory( $http, CREST, getCrestServiceInfo ) {
-    return function( callback ) {
+    return function( callback, errorcallback ) {
       getCrestServiceInfo( CREST.PUBLIC, 'marketTypes' )
         .then( function( serviceInfo ) {
-          return serviceInfo.href;
-        } )
-        .then( function( url ) {
-          getFromUrl( url );
-        } );
+          getFromUrl( serviceInfo.href );
+        }, requestErrorHandler );
 
       function requestHandler( request ) {
         if ( request.data.next && request.data.next.href ) {
@@ -16,15 +13,23 @@ angular.module( 'eve-crest' )
           console.log( 'all items cached' );
         }
 
-        return request.data.items;
+        callback( request.data.items, request.data.next && request.data.next.href );
+      }
+
+      function requestErrorHandler( request ) {
+        errorcallback( {
+          status: request.status,
+          statusText: request.statusText
+        } );
       }
 
       function getFromUrl( url ) {
+        console.log("getFromUrl");
+        console.log(url);
         $http.get( url, {
             cache: true
           } )
-          .then( requestHandler )
-          .then( callback );
+          .then( requestHandler, requestErrorHandler );
       };
     }
   } );
