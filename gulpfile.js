@@ -1,38 +1,29 @@
+var concat = require('gulp-concat');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var plumber = require('gulp-plumber');
-var sourcemaps = require('gulp-sourcemaps');
-var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
+var plumber = require('gulp-plumber');
 var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
 
-var buildtargetjs = "public/js/";
-var buildtargetstyle = "public/style/"
-var buildtargetstyletheme = "public/style/theme"
-
-var paths = {};
-
-paths.all = [
-  'public/**/*.*'
-];
-
-paths.angular = [
-  'bower_components/angular/angular.min.js',
-  'bower_components/angular-route/angular-route.min.js'
-];
-
-paths.scripts = [
-  'modules/*/app.js',
-  'modules/**/*.js'
-];
-
-paths.styles = [
-  'style/*.scss'
-];
-
-paths.stylethemes = [
-  'style/theme/*.scss'
-];
+var paths = { in : {
+    angular: [
+      'bower_components/angular/angular.min.js',
+      'bower_components/angular-route/angular-route.min.js'
+    ],
+    scripts: [
+      'modules/*/app.js',
+      'modules/**/*.js'
+    ],
+    styles: 'style/*.scss',
+    stylethemes: 'style/theme/*.scss'
+  },
+  out: {
+    scripts: 'public/js',
+    styles: 'public/style',
+    stylethemes: 'public/style/theme'
+  }
+};
 
 // https://www.timroes.de/2015/01/06/proper-error-handling-in-gulp-js/
 var gulp_src = gulp.src;
@@ -56,13 +47,13 @@ gulp.task('connect', function () {
 });
 
 gulp.task('angular-init', function () {
-  gulp.src(paths.angular)
+  gulp.src(paths.in.angular)
     .pipe(concat('angular.min.js'))
-    .pipe(gulp.dest(buildtargetjs));
+    .pipe(gulp.dest(paths.out.scripts));
 });
 
 gulp.task('scripts-init', function () {
-  gulp.src(paths.scripts)
+  gulp.src(paths.in.scripts)
     .pipe(sourcemaps.init())
     .pipe(uglify({
       mangle: false
@@ -72,38 +63,38 @@ gulp.task('scripts-init', function () {
       mangle: false
     }))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(buildtargetjs));
+    .pipe(gulp.dest(paths.out.scripts));
 });
 
 gulp.task('styles-init', function () {
-  gulp.src(paths.styles)
+  gulp.src(paths.in.styles)
     .pipe(sourcemaps.init())
     .pipe(concat('styles.min.css'))
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(buildtargetstyle));
-  gulp.src(paths.stylethemes)
+    .pipe(gulp.dest(paths.out.styles));
+  gulp.src(paths.in.stylethemes)
     .pipe(sourcemaps.init())
     .pipe(sass({
       outputStyle: 'compressed'
     }).on('error', sass.logError))
     .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(buildtargetstyletheme));
+    .pipe(gulp.dest(paths.out.stylethemes));
 });
 
 gulp.task('watch', function () {
   var watch = require('gulp-watch');
-  watch(paths.scripts, function () {
+  watch('js/**/*.*', function () {
     gulp.start('scripts-init');
   });
-  watch('style/**/*.scss', function () {
+  watch('style/**/*.*', function () {
     gulp.start('styles-init');
   });
-  watch(paths.all, function () {
+  watch('public/**/*.*', function () {
     var connect = require('gulp-connect');
-    gulp.src(paths.all)
+    gulp.src('public/**/*.*')
       .pipe(connect.reload());
   });
 });
