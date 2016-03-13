@@ -13,7 +13,7 @@ angular.module( 'eve-crest' )
           console.log( 'all items cached' );
         }
 
-        callback( request.data.items, request.data.next && request.data.next.href );
+        callback( request.data.items, !Boolean(request.data.next && request.data.next.href)  );
       }
 
       function requestErrorHandler( request ) {
@@ -24,8 +24,6 @@ angular.module( 'eve-crest' )
       }
 
       function getFromUrl( url ) {
-        console.log("getFromUrl");
-        console.log(url);
         $http.get( url, {
             cache: true
           } )
