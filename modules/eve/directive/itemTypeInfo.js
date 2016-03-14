@@ -29,7 +29,7 @@ angular.module( 'eve' )
           return typeRenderUrlService( item.id );
         };
 
-        var keysToIgnore = [ 'name', 'id', 'id_str', 'iconID_str', 'description', 'portionSize_str' ];
+        var keysToIgnore = [ 'name', 'id_str', 'iconID_str', 'description', 'portionSize_str' ];
 
         $scope.stringOnly = function( item ) {
           var result = {};
