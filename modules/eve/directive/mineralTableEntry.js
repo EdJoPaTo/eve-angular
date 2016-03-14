@@ -26,7 +26,7 @@ angular.module('eve')
       };
 
       function getAllPrices () {
-        return scope.regions.map(function (v) { return scope.prices[v.id]; }).filter(function (v) { return !isNaN(v); });
+        return scope.regions.map( v => scope.prices[ v.id ] ).filter( v => !isNaN( v ) );
       }
 
       scope.isMax = function (price) {

@@ -1,3 +1,4 @@
+var babel = require( 'gulp-babel' );
 var concat = require( 'gulp-concat' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
@@ -68,9 +69,7 @@ gulp.task( 'templates', function() {
 gulp.task( 'scripts', function() {
   gulp.src( paths.in.scripts )
     .pipe( sourcemaps.init() )
-    .pipe( uglify( {
-      mangle: false
-    } ) )
+    .pipe( babel() )
     .pipe( concat( 'scripts.min.js' ) )
     .pipe( uglify( {
       mangle: false

@@ -26,7 +26,7 @@ angular.module('eve-crest')
   service.getItemsOfMarketGroup = function (marketGroupId) {
     var url = CREST_BASE_URL + "market/types/?group=" + CREST_BASE_URL + "market/groups/" + marketGroupId + "/";
     return askCrest(url).then(function (data) {
-      return data.items.map(function (v) { return v.type; });
+      return data.items.map( v => v.type );
     });
   }
 
