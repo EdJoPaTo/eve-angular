@@ -27,9 +27,12 @@ angular.module( 'eve' )
       } );
     };
 
-    $scope.$watch( 'q', function( newValue ) {
-      $scope.currentitem = $filter( 'filter' )( $scope.items, $scope.q )[ 0 ];
-    } );
+    $scope.$watch( 'items', () => updateCurrentSelectedItem() );
+    $scope.$watch( 'q', () => updateCurrentSelectedItem() );
+
+    function updateCurrentSelectedItem() {
+      $scope.selectitem( $filter( 'filter' )( $scope.items, $scope.q )[ 0 ] );
+    }
 
     $scope.$watch( 'currentitem', function( newValue ) {
       if ( !$scope.currentitem || !$scope.currentitem.id ) return;
