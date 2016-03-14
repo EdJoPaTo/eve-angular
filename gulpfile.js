@@ -2,6 +2,7 @@ var concat = require( 'gulp-concat' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
 var uglify = require( 'gulp-uglify' );
+var minifyHtml = require( 'gulp-minify-html' );
 var plumber = require( 'gulp-plumber' );
 var sass = require( 'gulp-sass' );
 var sourcemaps = require( 'gulp-sourcemaps' );
@@ -11,6 +12,8 @@ var paths = { in : {
       'bower_components/angular/angular.min.js',
       'bower_components/angular-route/angular-route.min.js'
     ],
+    indexhtml: 'modules/index.html',
+    templates: 'modules/**/*.html',
     scripts: [
       'modules/*/app.js',
       'modules/**/*.js'
@@ -19,6 +22,8 @@ var paths = { in : {
     stylethemes: 'style/theme/*.scss'
   },
   out: {
+    indexhtml: 'public/',
+    templates: 'public/',
     scripts: 'public/js',
     styles: 'public/style',
     stylethemes: 'public/style/theme'
@@ -49,6 +54,15 @@ gulp.task( 'angular-init', function() {
   gulp.src( paths.in.angular )
     .pipe( concat( 'angular.min.js' ) )
     .pipe( gulp.dest( paths.out.scripts ) );
+} );
+
+gulp.task( 'templates', function() {
+  gulp.src( paths.in.indexhtml )
+    .pipe( minifyHtml() )
+    .pipe( gulp.dest( paths.out.indexhtml ) );
+  gulp.src( paths.in.templates )
+    .pipe( minifyHtml() )
+    .pipe( gulp.dest( paths.out.templates ) );
 } );
 
 gulp.task( 'scripts-init', function() {
@@ -85,7 +99,10 @@ gulp.task( 'styles-init', function() {
 
 gulp.task( 'watch', function() {
   var watch = require( 'gulp-watch' );
-  watch( 'modules/**/*.*', function() {
+  watch( 'modules/**/*.html', function() {
+    gulp.start( 'templates' );
+  } );
+  watch( 'modules/**/*.js', function() {
     gulp.start( 'scripts-init' );
   } );
   watch( 'style/**/*.*', function() {
@@ -98,6 +115,6 @@ gulp.task( 'watch', function() {
   } );
 } );
 
-gulp.task( 'default', [ 'angular-init', 'scripts-init', 'styles-init' ] );
+gulp.task( 'default', [ 'angular-init', 'templates', 'scripts-init', 'styles-init' ] );
 
 gulp.task( 'dev', [ 'default', 'connect', 'watch' ] );

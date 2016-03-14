@@ -5,7 +5,7 @@ angular.module( 'eve' )
       scope: {
         item: "="
       },
-      templateUrl: 'templates/directives/iteminfofull.html',
+      templateUrl: 'eve/directive/itemInfoFull.html',
       controller: function( $scope, $sce ) {
         $scope.html = function( text ) {
           if ( !text ) return "";

@@ -8,7 +8,7 @@ angular.module('eve')
       filter: "=",
       editmode: "="
     },
-    templateUrl: 'templates/directives/mineralTable.html',
+    templateUrl: 'eve/directive/mineralTable.html',
     link: function (scope, element, attr) {
       scope.regions = [
         { id: 10000002, name: "The Forge" },

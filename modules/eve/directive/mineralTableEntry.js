@@ -8,7 +8,7 @@ angular.module('eve')
       regions: "=",
       editmode: "="
     },
-    templateUrl: 'templates/directives/mineralTableEntry.html',
+    templateUrl: 'eve/directive/mineralTableEntry.html',
     link: function (scope, element, attr) {
       for (var i = 0; i < scope.regions.length; i++) {
         loadPrice(scope.regions[i].id, scope.item.id, scope.pricetype);

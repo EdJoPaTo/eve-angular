@@ -1,4 +1,7 @@
 node_modules
 bower_components
 public/js/
+public/eve/
+public/general/
 public/style/
+public/index.html
