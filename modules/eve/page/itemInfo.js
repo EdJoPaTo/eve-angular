@@ -1,5 +1,6 @@
 angular.module( 'eve' )
   .controller( 'ItemInfoCtrl', function( $scope, $filter, allMarketItemsService ) {
+    $scope.itemsInList = 25;
     $scope.items = [];
     $scope.stillloading = true;
     $scope.currentitem = {};
