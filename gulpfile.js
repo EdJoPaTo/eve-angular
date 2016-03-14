@@ -1,11 +1,11 @@
 var concat = require( 'gulp-concat' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
-var uglify = require( 'gulp-uglify' );
 var minifyHtml = require( 'gulp-minify-html' );
 var plumber = require( 'gulp-plumber' );
 var sass = require( 'gulp-sass' );
 var sourcemaps = require( 'gulp-sourcemaps' );
+var uglify = require( 'gulp-uglify' );
 
 var paths = { in : {
     angular: [
@@ -50,7 +50,7 @@ gulp.task( 'connect', function() {
   } );
 } );
 
-gulp.task( 'angular-init', function() {
+gulp.task( 'angular', function() {
   gulp.src( paths.in.angular )
     .pipe( concat( 'angular.min.js' ) )
     .pipe( gulp.dest( paths.out.scripts ) );
@@ -65,7 +65,7 @@ gulp.task( 'templates', function() {
     .pipe( gulp.dest( paths.out.templates ) );
 } );
 
-gulp.task( 'scripts-init', function() {
+gulp.task( 'scripts', function() {
   gulp.src( paths.in.scripts )
     .pipe( sourcemaps.init() )
     .pipe( uglify( {
@@ -79,7 +79,7 @@ gulp.task( 'scripts-init', function() {
     .pipe( gulp.dest( paths.out.scripts ) );
 } );
 
-gulp.task( 'styles-init', function() {
+gulp.task( 'styles', function() {
   gulp.src( paths.in.styles )
     .pipe( sourcemaps.init() )
     .pipe( concat( 'styles.min.css' ) )
@@ -103,10 +103,10 @@ gulp.task( 'watch', function() {
     gulp.start( 'templates' );
   } );
   watch( 'modules/**/*.js', function() {
-    gulp.start( 'scripts-init' );
+    gulp.start( 'scripts' );
   } );
   watch( 'style/**/*.*', function() {
-    gulp.start( 'styles-init' );
+    gulp.start( 'styles' );
   } );
   watch( 'public/**/*.*', function() {
     var connect = require( 'gulp-connect' );
@@ -115,6 +115,6 @@ gulp.task( 'watch', function() {
   } );
 } );
 
-gulp.task( 'default', [ 'angular-init', 'templates', 'scripts-init', 'styles-init' ] );
+gulp.task( 'default', [ 'angular', 'templates', 'scripts', 'styles' ] );
 
 gulp.task( 'dev', [ 'default', 'connect', 'watch' ] );
