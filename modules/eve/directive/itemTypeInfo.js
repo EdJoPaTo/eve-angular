@@ -26,6 +26,7 @@ angular.module( 'eve' )
         $scope.icon = typeIconUrlService;
         $scope.render = function( item ) {
           if ( !item.graphicID ) return "";
+          if ( !item.graphicID.sofDNA ) return ""; //TODO: damit fallen auch alle Turrets raus, die angezeigt werden könnten...
           return typeRenderUrlService( item.id );
         };
 
