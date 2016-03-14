@@ -21,15 +21,15 @@ angular.module( 'eve' )
         if ( !$scope.currentitem ) return;
         if ( typeInfo.id != $scope.currentitem.id ) return;
         $scope.currentTypeInfo = typeInfo;
-      } )
-    }
+      } );
+    };
 
     $scope.$watch( 'q', function( newValue ) {
       $scope.currentitem = $filter( 'filter' )( $scope.items, $scope.q )[ 0 ];
-    } )
+    } );
 
     $scope.$watch( 'currentitem', function( newValue ) {
       if ( !$scope.currentitem || !$scope.currentitem.id ) return;
       $scope.getTypeInfo( $scope.currentitem );
-    } )
+    } );
   } );

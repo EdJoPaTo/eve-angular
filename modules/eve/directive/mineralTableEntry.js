@@ -23,7 +23,7 @@ angular.module('eve')
           scope.prices[regionId] = data;
           scope.ownPrice = Math.max.apply(null, getAllPrices());
         });
-      };
+      }
 
       function getAllPrices () {
         return scope.regions.map( v => scope.prices[ v.id ] ).filter( v => !isNaN( v ) );
@@ -43,7 +43,7 @@ angular.module('eve')
 
       scope.icon = function (id) {
         return id ? "//image.eveonline.com/Type/" + id + "_64.png" : "";
-      }
+      };
     }
   };
 });
