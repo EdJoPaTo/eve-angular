@@ -5,11 +5,14 @@ angular.module( 'eve' )
     $scope.currentitem = {};
     $scope.currentTypeInfo = {};
 
-    allMarketItemsService( function( items, finished ) {
-      $scope.items = $scope.items.concat( items );
-      $scope.stillloading = !finished;
-    }, function( e ) {
-      $scope.error = e;
+    allMarketItemsService().then( function( allItems ) {
+      $scope.items = allItems;
+    }, function( error ) {
+      $scope.error = error;
+    }, function( itemsPart ) {
+      $scope.items = itemsPart;
+    } ).finally( function() {
+      $scope.stillloading = false;
     } );
 
     $scope.selectitem = function( item ) {
