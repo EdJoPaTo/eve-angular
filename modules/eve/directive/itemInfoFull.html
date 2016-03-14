@@ -1,7 +1,9 @@
 <div class="iteminfolong">
   <style>
-    body {
-          background-image: url({{ render(item) }});
+    @media (min-width:768px) {
+      body {
+        background-image: url({{ render(item) }});
+      }
     }
   </style>
 
