@@ -1,12 +1,21 @@
 angular.module( 'eve' )
-  .directive( 'itemInfoFull', function( typeIconUrlService, typeRenderUrlService ) {
+  .directive( 'itemInfoFull', function( typeInfoService, typeIconUrlService, typeRenderUrlService ) {
     return {
       restrict: "E",
       scope: {
-        item: "="
+        itemId: "="
       },
       templateUrl: 'eve/directive/itemInfoFull.html',
       controller: function( $scope, $sce ) {
+        $scope.item = {};
+        $scope.$watch( 'itemId', function() {
+          if ( !$scope.itemId ) return;
+          typeInfoService( $scope.itemId ).then( function( typeInfo ) {
+            if ( typeInfo.id != $scope.itemId ) return;
+            $scope.item = typeInfo;
+          } );
+        } );
+
         $scope.html = function( text ) {
           if ( !text ) return "";
           var tmp = text;
@@ -20,10 +29,6 @@ angular.module( 'eve' )
           if ( !item.graphicID ) return "";
           return typeRenderUrlService( item.id );
         };
-
-        function clone( object ) {
-          return JSON.parse( JSON.stringify( object ) );
-        }
 
         var keysToIgnore = [ 'name', 'id', 'id_str', 'iconID_str', 'description', 'portionSize_str' ];
 
@@ -47,7 +52,7 @@ angular.module( 'eve' )
           }
 
           return result;
-        }
+        };
 
         var objectsToIgnore = [ 'dogma', 'attributes', 'effects', 'graphicID' ];
 
@@ -58,7 +63,7 @@ angular.module( 'eve' )
             if ( objectsToIgnore.includes( v ) ) return false;
             return typeof item[ v ] === 'object';
           } );
-        }
+        };
       }
     };
   } );
