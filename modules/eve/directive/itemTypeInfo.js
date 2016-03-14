@@ -1,11 +1,10 @@
 angular.module( 'eve' )
-  .directive( 'itemInfoFull', function( typeInfoService, typeIconUrlService, typeRenderUrlService ) {
+  .directive( 'itemTypeInfo', function( typeInfoService, typeIconUrlService, typeRenderUrlService ) {
     return {
-      restrict: "E",
       scope: {
         itemId: "="
       },
-      templateUrl: 'eve/directive/itemInfoFull.html',
+      templateUrl: 'eve/directive/itemTypeInfo.html',
       controller: function( $scope, $sce ) {
         $scope.item = {};
         $scope.$watch( 'itemId', function() {
