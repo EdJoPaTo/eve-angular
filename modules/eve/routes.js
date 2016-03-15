@@ -13,7 +13,8 @@ angular.module( "eve" )
       } )
       .when( '/iteminfo', {
         templateUrl: 'eve/page/itemInfo.html',
-        controller: 'ItemInfoCtrl'
+        controller: 'ItemInfoCtrl',
+        reloadOnSearch: false
       } )
       .when( '/impressum', {
         templateUrl: 'general/page/impressum.html'

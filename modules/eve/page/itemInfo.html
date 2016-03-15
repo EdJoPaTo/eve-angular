@@ -4,18 +4,18 @@
   <input type="text" placeholder="Search for an item..." ng-model="q" autocorrect="off" autocapitalize="off" autocomplete="off" tabindex="1" autofocus />
   <div class="row">
     <div class="col-sm-4">
-      <div ng-repeat="item in items | filter: q | limitTo: itemsInList" ng-click="selectitem(item)">
-        <a href ng-click="selectitem(item)">
+      <div ng-repeat="item in currentitems | limitTo: itemsInList">
+        <a href ng-click="selectitem(item.id)">
           <strong>{{item.type.name}}</strong> {{item.id}}
         </a>
         <br />
       </div>
-      <div ng-show="( items | filter: q ).length > itemsInList">
-        and {{ ( items | filter: q ).length - itemsInList }} more...
+      <div ng-show="currentitems.length > itemsInList">
+        and {{ currentitems.length - itemsInList }} more...
       </div>
     </div>
     <div class="col-sm-8">
-      <div item-type-info item-id="currentitem.id"></div>
+      <div item-type-info item-id="selecteditem"></div>
     </div>
   </div>
 </div>
