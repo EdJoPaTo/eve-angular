@@ -1,0 +1,23 @@
+div[item-quick-info] {
+  background: {
+    position: 0 center;
+    repeat: no-repeat;
+    size: 64px 64px;
+  }
+
+  .itemid {
+    opacity: 0.2;
+    transition: {
+      property: opacity;
+      duration: 0.5s;
+      timing-function: ease;
+      delay: 0s;
+    }
+  }
+
+  .itemid:hover {
+    opacity: 0.8;
+  }
+  min-height: 64px;
+  padding-left: 70px;
+}

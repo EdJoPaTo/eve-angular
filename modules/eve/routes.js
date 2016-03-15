@@ -16,6 +16,11 @@ angular.module( "eve" )
         controller: 'ItemInfoCtrl',
         reloadOnSearch: false
       } )
+      .when( '/itemestimator', {
+        templateUrl: 'eve-estimator/page/itemEstimator.html',
+        controller: 'ItemEstimatorCtrl',
+        reloadOnSearch: false
+      } )
       .when( '/impressum', {
         templateUrl: 'general/page/impressum.html'
       } )

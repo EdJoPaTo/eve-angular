@@ -1,0 +1,19 @@
+<h1>Item Estimator</h1>
+<div build-cache-indicator class="top-right-corner" error="error" itemcount="items.length" stillloading="stillloading"></div>
+<div class="item-estimator" class="row">
+  <div class="col-sm-4">
+    <div ng-repeat="item in currentitems | orderBy : '-fullprice'" item-quick-info amount="item.amount" item-id="item.id" singleprice="item.price"></div>
+  </div>
+  <div class="col-sm-8">
+    <textarea nice-height-textarea ng-model="input" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" translate="false" tabindex="1" autofocus></textarea>
+    <h2>Options</h2>
+    Pricetype:
+    <select ng-model="pricetype">
+      <option value="buy">Accept Buy Order</option>
+      <option value="sell">Place Sell Order</option>
+    </select>
+    <br/>
+    Region:
+    <select ng-model="region" ng-options="region.id as region.name for region in regions"></select>
+  </div>
+</div>
