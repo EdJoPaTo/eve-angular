@@ -6,7 +6,8 @@ angular.module( 'eve-crest' )
       return getCrestServiceInfo( CREST.PUBLIC, 'regions' )
         .then( regionServiceInfo => regionServiceInfo.href )
         .then( httpCached )
-        .then( response => response.data.items );
+        .then( response => response.data.items )
+        .then( regions => regions.filter( region => !region.name.match( '.-R00' ) || region.name === 'G-R00031' ) );
     };
 
     service.getSpecific = function( regionId ) {
