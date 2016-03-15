@@ -1,9 +1,7 @@
 angular.module( 'eve-crest' )
-  .factory( 'getCrestServiceInfo', function( $http ) {
+  .factory( 'getCrestServiceInfo', function( httpCached ) {
     return function( crestBaseUrl, serviceName ) {
-      return $http.get( crestBaseUrl, {
-          cache: true
-        } )
+      return httpCached( crestBaseUrl )
         .then( function( request ) {
           return request.data[ serviceName ];
         } );

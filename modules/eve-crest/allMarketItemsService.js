@@ -1,5 +1,5 @@
 angular.module( 'eve-crest' )
-  .factory( 'allMarketItemsService', function allMarketItemsFactory( $http, $q, CREST, getCrestServiceInfo ) {
+  .factory( 'allMarketItemsService', function allMarketItemsFactory( httpCached, $q, CREST, getCrestServiceInfo ) {
     return function() {
       var deferred = $q.defer();
       var items = [];
@@ -30,9 +30,7 @@ angular.module( 'eve-crest' )
       }
 
       function getFromUrl( url ) {
-        $http.get( url, {
-            cache: true
-          } )
+        httpCached( url )
           .then( requestHandler, requestErrorHandler );
       }
 
