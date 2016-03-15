@@ -33,7 +33,7 @@ angular.module( 'eve' )
     } );
 
     $scope.$watch( 'q', function( newValue, oldValue ) {
-      if ( !oldValue || !newValue ) return;
+      if ( !oldValue ) return;
       if ( oldValue === newValue ) return;
       // Wenn sich der Suchtext ändert die Itemauswahl resetten
       $route.updateParams( {
