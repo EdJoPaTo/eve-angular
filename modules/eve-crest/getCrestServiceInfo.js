@@ -2,9 +2,7 @@ angular.module( 'eve-crest' )
   .factory( 'getCrestServiceInfo', function( $q, httpCached ) {
     function getSingleServiceInfo( crestBaseUrl, serviceName ) {
       return httpCached( crestBaseUrl )
-        .then( function( request ) {
-          return request.data[ serviceName ];
-        } );
+        .then( response => response.data[ serviceName ] );
     }
 
     return function( crestBaseUrl, serviceName ) {

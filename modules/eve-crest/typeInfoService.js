@@ -5,9 +5,7 @@ angular.module( 'eve-crest' )
       var url = serviceUrl + id + '/';
 
       return httpCached( url )
-        .then( function( request ) {
-          return request.data;
-        } );
+        .then( response => response.data );
     }
 
     return function( id ) {
