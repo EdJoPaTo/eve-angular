@@ -1,5 +1,5 @@
 angular.module('eve')
-.directive('mineralTableEntry', function (crestMarketPriceService) {
+.directive( 'mineralTableEntry', function( crestMarketService ) {
   return {
     restrict: "A",
     scope: {
@@ -19,7 +19,7 @@ angular.module('eve')
       scope.prices = {};
 
       function loadPrice( regionId, itemId, pricetype ) {
-        crestMarketPriceService.getBestPrice(regionId, itemId, pricetype).then(function(data) {
+        crestMarketService.getBestPrice( regionId, itemId, pricetype ).then( function( data ) {
           scope.prices[regionId] = data;
           scope.ownPrice = Math.max.apply(null, getAllPrices());
         });

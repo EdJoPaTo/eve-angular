@@ -1,5 +1,5 @@
 angular.module( 'eve' )
-  .controller( 'ItemInfoCtrl', function( $scope, $route, $routeParams, $filter, allMarketItemsService ) {
+  .controller( 'ItemInfoCtrl', function( $scope, $route, $routeParams, $filter, crestMarketService ) {
     $scope.itemsInList = 25;
     $scope.items = [];
     $scope.stillloading = true;
@@ -7,7 +7,7 @@ angular.module( 'eve' )
     $scope.selecteditem = $routeParams.id;
     $scope.q = $routeParams.q || $routeParams.id;
 
-    allMarketItemsService().then( function( allItems ) {
+    crestMarketService.getAllMarketItems().then( function( allItems ) {
       $scope.items = allItems;
     }, function( error ) {
       $scope.error = error;

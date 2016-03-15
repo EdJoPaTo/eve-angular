@@ -1,5 +1,5 @@
 angular.module('eve')
-.directive('mineralTable', function (crestMarketPriceService) {
+.directive( 'mineralTable', function( crestMarketService ) {
   return {
     restrict: "E",
     scope: {
@@ -20,7 +20,7 @@ angular.module('eve')
 
       scope.minerals = [];
       function loadMarketGroup(marketGroupId) {
-        crestMarketPriceService.getItemsOfMarketGroup(marketGroupId).then(function (data) {
+        crestMarketService.getItemsOfMarketGroup( marketGroupId ).then( function ( data ) {
           scope.minerals = scope.minerals.concat(data);
         });
       }
