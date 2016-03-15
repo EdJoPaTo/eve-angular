@@ -1,7 +1,7 @@
 <div id="iteminfo">
   <h1>Item Info</h1>
   <div build-cache-indicator class="top-right-corner" error="error" itemcount="items.length" stillloading="stillloading"></div>
-  <input type="text" placeholder="Search for an item..." ng-model="q" autocorrect="off" autocapitalize="off" autocomplete="off" tabindex="1" autofocus />
+  <input type="text" placeholder="Search for an item..." ng-model="q" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" translate="false" tabindex="1" autofocus />
   <div class="row">
     <div class="col-sm-4">
       <div ng-repeat="item in currentitems | limitTo: itemsInList">
