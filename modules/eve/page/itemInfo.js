@@ -11,8 +11,8 @@ angular.module( 'eve' )
       $scope.items = allItems;
     }, function( error ) {
       $scope.error = error;
-    }, function( itemsPart ) {
-      $scope.items = itemsPart;
+    }, function( part ) {
+      $scope.items = part.items;
     } ).finally( function() {
       $scope.stillloading = false;
     } );
