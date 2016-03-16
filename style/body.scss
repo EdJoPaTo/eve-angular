@@ -24,6 +24,7 @@ body {
 
 .container {
   margin-top: 20px;
+  position: relative;
 
   @media (min-width:768px) {
     background-color: rgba(10,10,10, 0.6);
@@ -31,12 +32,8 @@ body {
   }
 }
 
-div[ng-view] {
-  position: relative;
-}
-
 .top-right-corner {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 15px;
 }
