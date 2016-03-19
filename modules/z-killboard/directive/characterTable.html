@@ -15,7 +15,7 @@
       </td>
     </tr>
   </thead>
-  <tr ng-repeat="character in characters">
+  <tr ng-repeat="character in characters | orderBy: '-iskDestroyed'">
     <td>
       {{ character.info.name }}
     </td>
@@ -27,7 +27,6 @@
       {{ character.iskDestroyed | isk : true}}<br/>
       {{ character.iskLost | isk : true }}
     </td>
-    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]">
-    </td>
+    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
   </tr>
 </table>
