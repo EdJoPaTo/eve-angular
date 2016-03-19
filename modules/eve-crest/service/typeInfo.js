@@ -1,5 +1,5 @@
 angular.module( 'eve-crest' )
-  .factory( 'typeInfoService', function typeInfoServiceFactory( httpCached, CREST, getCrestServiceInfo ) {
+  .factory( 'typeInfoService', function typeInfoServiceFactory( httpCached, CREST, crestServiceInfoService ) {
 
     function getTypeInfo( serviceUrl, id ) {
       var url = serviceUrl + id + '/';
@@ -9,7 +9,7 @@ angular.module( 'eve-crest' )
     }
 
     return function( id ) {
-      return getCrestServiceInfo( CREST.PUBLIC, 'itemTypes' )
+      return crestServiceInfoService( CREST.PUBLIC, 'itemTypes' )
         .then( function( serviceInfo ) {
           return serviceInfo.href;
         } )

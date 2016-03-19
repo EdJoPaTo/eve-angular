@@ -1,17 +1,17 @@
 angular.module( 'eve-crest' )
-  .factory( 'crestMarketService', function( httpCached, $q, CREST, getCrestServiceInfo, crestRegionsService, crestGetMultipagedItemsService ) {
+  .factory( 'crestMarketService', function( httpCached, $q, CREST, crestServiceInfoService, crestRegionsService, crestGetMultipagedItemsService ) {
     var service = {};
 
     var marketUrlSuffix = "?type=";
 
     service.getAllMarketItems = function() {
-      return getCrestServiceInfo( CREST.PUBLIC, 'marketTypes' )
+      return crestServiceInfoService( CREST.PUBLIC, 'marketTypes' )
         .then( serviceInfo => serviceInfo.href )
         .then( crestGetMultipagedItemsService );
     };
 
     service.getItemsOfMarketGroup = function( marketGroupId ) {
-      return getCrestServiceInfo( CREST.PUBLIC, [ 'marketTypes', 'marketGroups' ] )
+      return crestServiceInfoService( CREST.PUBLIC, [ 'marketTypes', 'marketGroups' ] )
         .then( data => data[ 0 ].href + '?group=' + data[ 1 ].href + marketGroupId + '/' )
         .then( crestGetMultipagedItemsService )
         .then( items => items.map( v => v.type ) );
@@ -20,7 +20,7 @@ angular.module( 'eve-crest' )
     service.getPrices = function( regionId, orderType, typeId ) {
       return $q.all( [
           crestRegionsService.getMarketUrl( regionId, orderType ),
-          getCrestServiceInfo( CREST.PUBLIC, 'itemTypes' ).then( serviceInfo => serviceInfo.href )
+          crestServiceInfoService( CREST.PUBLIC, 'itemTypes' ).then( serviceInfo => serviceInfo.href )
         ] )
         .then( urls => urls[ 0 ] + marketUrlSuffix + urls[ 1 ] + typeId + '/' )
         .then( crestGetMultipagedItemsService );

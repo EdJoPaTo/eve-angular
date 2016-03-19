@@ -1,9 +1,9 @@
 angular.module( 'eve-crest' )
-  .factory( 'crestRegionsService', function( httpCached, CREST, getCrestServiceInfo ) {
+  .factory( 'crestRegionsService', function( httpCached, CREST, crestServiceInfoService ) {
     var service = {};
 
     service.getAll = function() {
-      return getCrestServiceInfo( CREST.PUBLIC, 'regions' )
+      return crestServiceInfoService( CREST.PUBLIC, 'regions' )
         .then( regionServiceInfo => regionServiceInfo.href )
         .then( httpCached )
         .then( response => response.data.items )
@@ -11,7 +11,7 @@ angular.module( 'eve-crest' )
     };
 
     service.getSpecific = function( regionId ) {
-      return getCrestServiceInfo( CREST.PUBLIC, 'regions' )
+      return crestServiceInfoService( CREST.PUBLIC, 'regions' )
         .then( regionServiceInfo => regionServiceInfo.href )
         .then( url => httpCached( url + regionId + '/' ) )
         .then( response => response.data );
