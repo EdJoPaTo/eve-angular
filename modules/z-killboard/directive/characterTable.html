@@ -1,0 +1,33 @@
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <td>
+        Player
+      </td>
+      <td>
+        Success
+      </td>
+      <td>
+        ISK
+      </td>
+      <td ng-repeat="id in groups | orderBy">
+        {{ groupName[id] || id }}
+      </td>
+    </tr>
+  </thead>
+  <tr ng-repeat="character in characters">
+    <td>
+      {{ character.info.name }}
+    </td>
+    <td ng-class="{ success: characterSuccessRate(character) > 0.5, danger: characterSuccessRate(character) < 0.5 }">
+      {{ characterSuccessRate(character) * 100 | number : 1 }}
+      %
+    </td>
+    <td class="text-right">
+      {{ character.iskDestroyed | isk : true}}<br/>
+      {{ character.iskLost | isk : true }}
+    </td>
+    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]">
+    </td>
+  </tr>
+</table>
