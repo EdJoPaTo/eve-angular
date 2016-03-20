@@ -34,7 +34,7 @@ angular.module( 'z-killboard' )
                 return;
               }
 
-              if (!zKillInfo.iskDestroyed) zKillInfo.iskDestroyed = 0;
+              if ( !zKillInfo.iskDestroyed ) zKillInfo.iskDestroyed = 0;
               scope.characters.push( zKillInfo );
               console.log( zKillInfo );
 
@@ -70,7 +70,7 @@ angular.module( 'z-killboard' )
           if ( !character.iskDestroyed && !character.iskLost ) return NaN;
 
           let dest = character.iskDestroyed || 0;
-          let lost = character.iskLost || 0
+          let lost = character.iskLost || 0;
           return dest / ( dest + lost );
         };
       }

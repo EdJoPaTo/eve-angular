@@ -9,7 +9,7 @@ angular.module( 'eve-general' )
         let engineerExponentLevel = Math.floor( exponent / 3 );
         let engineerExponent = engineerExponentLevel * 3;
         let letter = allLetters[ engineerExponentLevel ];
-        let shortValue = input / Math.pow(10, engineerExponent );
+        let shortValue = input / Math.pow( 10, engineerExponent );
 
         return $filter( 'number' )( shortValue, 2 - exponent % 3 ) + letter;
       } else {
