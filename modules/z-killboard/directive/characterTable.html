@@ -25,10 +25,7 @@
       {{ characterSuccessRate(character) * 100 | number : 1 }}
       %
     </td>
-    <td class="text-right">
-      {{ character.iskDestroyed | isk : true}}<br/>
-      {{ character.iskLost | isk : true }}
-    </td>
+    <td character-table-isk-cell object="character"></td>
     <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
   </tr>
   <tr ng-repeat="character in noInfoCharacters">
