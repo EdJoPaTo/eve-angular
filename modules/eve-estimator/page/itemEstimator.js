@@ -2,8 +2,6 @@ angular.module( 'eve-estimator' )
   .controller( 'ItemEstimatorCtrl', function( $scope, $route, $routeParams, crestMarketService, crestRegionsService, itemsFromStringService ) {
     $scope.pricetype = $routeParams.pricetype || 'sell';
     $scope.items = [];
-    $scope.regions = [];
-    $scope.region = Number( $routeParams.region ) || 10000002;
     $scope.stillloading = true;
 
     crestMarketService.getAllMarketItems().then( function( allItems ) {
@@ -16,21 +14,10 @@ angular.module( 'eve-estimator' )
       $scope.stillloading = false;
     } );
 
-    crestRegionsService.getAll().then( function( allRegions ) {
-      $scope.regions = allRegions;
-    } );
-
     $scope.$watch( 'pricetype', function( newValue, oldValue ) {
       if ( newValue === oldValue ) return;
       $route.updateParams( {
         pricetype: newValue === 'buy' ? 'buy' : null
-      } );
-    } );
-
-    $scope.$watch( 'region', function( newValue, oldValue ) {
-      if ( newValue === oldValue ) return;
-      $route.updateParams( {
-        region: newValue !== 10000002 ? newValue : null
       } );
     } );
 
