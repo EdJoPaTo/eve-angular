@@ -1,1 +1,3 @@
-angular.module( 'eve-estimator', [] );
+angular.module( 'eve-estimator', [
+  'eve-xml-api'
+] );
