@@ -65,14 +65,6 @@ angular.module( 'z-killboard' )
           if ( newValue === oldValue ) return;
           loadCharacters( newValue );
         } );
-
-        scope.characterSuccessRate = function( character ) {
-          if ( !character.iskDestroyed && !character.iskLost ) return NaN;
-
-          let dest = character.iskDestroyed || 0;
-          let lost = character.iskLost || 0;
-          return dest / ( dest + lost );
-        };
       }
     };
   } );

@@ -1,0 +1,10 @@
+<span class="successtext">
+  {{ destroyed | isk: true }}
+</span>
+<br>
+{{ successrate( destroyed, lost ) * 100 | number: 1 }}
+%
+<br>
+<span class="losstext">
+  {{ lost | isk: true }}
+</span>

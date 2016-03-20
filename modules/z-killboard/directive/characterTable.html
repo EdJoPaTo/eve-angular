@@ -5,12 +5,17 @@
         <th>
           Player
         </th>
-        <th class="rotate">
+        <th class="text-center">
           <div>
-            Success
+            Ships
           </div>
         </th>
-        <th class="rotate">
+        <th class="text-center">
+          <div>
+            Points
+          </div>
+        </th>
+        <th class="text-center">
           <div>
             ISK
           </div>
@@ -31,11 +36,9 @@
           {{ character.info.name }}
         </a>
       </th>
-      <td ng-class="{ success: characterSuccessRate(character) > 0.5, danger: characterSuccessRate(character) < 0.5 }">
-        {{ characterSuccessRate(character) * 100 | number : 1 }}
-        %
-      </td>
-      <td character-table-isk-cell object="character"></td>
+      <td character-table-success-rate-cell destroyed="character.shipsDestroyed" lost="character.shipsLost"></td>
+      <td character-table-success-rate-cell destroyed="character.pointsDestroyed" lost="character.pointsLost"></td>
+      <td character-table-success-rate-cell destroyed="character.iskDestroyed" lost="character.iskLost"></td>
       <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
       <th class="text-right">
         <a ng-href="//zKillboard.com/character/{{ character.id }}/" target="_blank">
@@ -47,6 +50,9 @@
       <th>
         {{ character.info.name }}
       </th>
+      <td>
+        ?
+      </td>
       <td>
         ?
       </td>
