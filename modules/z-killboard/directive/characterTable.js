@@ -54,7 +54,7 @@ angular.module( 'z-killboard' )
         }
 
         function addGroupName( groupId ) {
-          crestItemGroupNameService( groupId, true )
+          crestItemGroupNameService( groupId )
             .then( function( groupName ) {
               scope.groupName[ groupId ] = groupName;
               console.log( scope.groupName );
