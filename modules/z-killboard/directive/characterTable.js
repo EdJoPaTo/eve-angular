@@ -13,6 +13,7 @@ angular.module( 'z-killboard' )
         function loadCharacters( ids ) {
           scope.characters = [];
           scope.groups = [];
+          ids = ids.filter( v => v && v !== 0 );
           for ( var i = 0; i < ids.length; i++ ) {
             loadCharacter( ids[ i ] );
           }
@@ -20,11 +21,13 @@ angular.module( 'z-killboard' )
 
         function loadCharacter( character ) {
           let id = character.characterId;
+          if ( !id || id === 0 ) return;
           zKillboardStatsCharacterService( id )
             .then( function( zKillInfo ) {
               scope.characters.push( zKillInfo );
               console.log( zKillInfo );
 
+              if ( !zKillInfo.groups ) return;
               let groupIds = Object.keys( zKillInfo.groups ).map( v => Number( v ) );
               for ( var i = 0; i < groupIds.length; i++ ) {
                 if ( !scope.groups.includes( groupIds[ i ] ) ) {
@@ -33,6 +36,9 @@ angular.module( 'z-killboard' )
                 }
               }
               scope.groups = scope.groups.concat( groupIds ).distinct();
+            }, error => {
+              console.error( 'zKillboardStatsCharacterService Error with id ' + id );
+              console.error( error );
             } );
         }
 
