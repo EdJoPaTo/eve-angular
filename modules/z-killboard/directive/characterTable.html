@@ -1,26 +1,32 @@
-<table class="table table-condensed">
+<table class="table table-header-rotated table-condensed">
   <thead>
     <tr>
-      <td>
+      <th>
         Player
-      </td>
-      <td>
-        Success
-      </td>
-      <td>
-        ISK
-      </td>
-      <td ng-repeat="id in groups | orderBy">
-        {{ groupName[id] || id }}
-      </td>
+      </th>
+      <th class="rotate">
+        <div>
+          Success
+        </div>
+      </th>
+      <th class="rotate">
+        <div>
+          ISK
+        </div>
+      </th>
+      <th ng-repeat="id in groups | orderBy" class="rotate">
+        <div>
+          {{ groupName[id] || id }}
+        </div>
+      </th>
     </tr>
   </thead>
   <tr ng-repeat="character in characters | orderBy: '-iskDestroyed'">
-    <td>
+    <th>
       <a ng-href="//zKillboard.com/character/{{ character.id }}/" target="_blank">
         {{ character.info.name }}
       </a>
-    </td>
+    </th>
     <td ng-class="{ success: characterSuccessRate(character) > 0.5, danger: characterSuccessRate(character) < 0.5 }">
       {{ characterSuccessRate(character) * 100 | number : 1 }}
       %
@@ -29,9 +35,9 @@
     <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
   </tr>
   <tr ng-repeat="character in noInfoCharacters">
-    <td>
+    <th>
       {{ character.info.name }}
-    </td>
+    </th>
     <td>
       ?
     </td>

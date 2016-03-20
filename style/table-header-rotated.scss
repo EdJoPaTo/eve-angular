@@ -1,0 +1,36 @@
+.table-header-rotated {
+  tbody {
+    td {
+      text-align: center;
+    }
+  }
+  $height: 200px;
+  $width: 30px;
+
+  @mixin transform($transformation) {
+    -moz-transform: $transformation;
+    -ms-transform: $transformation;
+    -o-transform: $transformation;
+    -webkit-transform: $transformation;
+    transform: $transformation;
+  }
+
+  .rotate {
+    height: $height;
+    max-width: $width;
+    min-width: $width;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+    width: $width;
+
+    div {
+      @include transform(rotate(-90deg) translateY(-80%));
+      bottom: $height / 2;
+      left: -1 * $width * 2;
+      position: absolute;
+      text-align: left;
+      width: $height;
+    }
+  }
+}
