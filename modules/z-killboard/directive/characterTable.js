@@ -14,23 +14,26 @@ angular.module( 'z-killboard' )
           scope.characters = [];
           scope.groups = [];
           for ( var i = 0; i < ids.length; i++ ) {
-            zKillboardStatsCharacterService( ids[ i ] )
-              .then( addCharacter );
+            loadCharacter( ids[ i ] );
           }
         }
 
-        function addCharacter( character ) {
-          scope.characters.push( character );
-          console.log( character );
+        function loadCharacter( character ) {
+          let id = character.characterId;
+          zKillboardStatsCharacterService( id )
+            .then( function( zKillInfo ) {
+              scope.characters.push( zKillInfo );
+              console.log( zKillInfo );
 
-          let groupIds = Object.keys( character.groups ).map( v => Number( v ) );
-          for ( var i = 0; i < groupIds.length; i++ ) {
-            if ( !scope.groups.includes( groupIds[ i ] ) ) {
-              scope.groups.push( groupIds[ i ] );
-              addGroupName( groupIds[ i ] );
-            }
-          }
-          scope.groups = scope.groups.concat( groupIds ).distinct();
+              let groupIds = Object.keys( zKillInfo.groups ).map( v => Number( v ) );
+              for ( var i = 0; i < groupIds.length; i++ ) {
+                if ( !scope.groups.includes( groupIds[ i ] ) ) {
+                  scope.groups.push( groupIds[ i ] );
+                  addGroupName( groupIds[ i ] );
+                }
+              }
+              scope.groups = scope.groups.concat( groupIds ).distinct();
+            } );
         }
 
         function addGroupName( groupId ) {
