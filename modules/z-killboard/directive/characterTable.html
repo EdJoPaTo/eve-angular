@@ -29,4 +29,16 @@
     </td>
     <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
   </tr>
+  <tr ng-repeat="character in noInfoCharacters">
+    <td>
+      {{ character.info.name }}
+    </td>
+    <td>
+      ?
+    </td>
+    <td>
+      ?
+    </td>
+    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
+  </tr>
 </table>

@@ -7,11 +7,13 @@ angular.module( 'z-killboard' )
       },
       link: function( scope, element, attr ) {
         scope.characters = [];
+        scope.noInfoCharacters = [];
         scope.groups = [];
         scope.groupName = {};
 
         function loadCharacters( ids ) {
           scope.characters = [];
+          scope.noInfoCharacters = [];
           scope.groups = [];
           ids = ids.filter( v => v && v !== 0 );
           for ( var i = 0; i < ids.length; i++ ) {
@@ -24,6 +26,13 @@ angular.module( 'z-killboard' )
           if ( !id || id === 0 ) return;
           zKillboardStatsCharacterService( id )
             .then( function( zKillInfo ) {
+              if ( !zKillInfo || !zKillInfo.info ) {
+                zKillInfo.info = {
+                  name: character.name
+                };
+                scope.noInfoCharacters.push( zKillInfo );
+                return;
+              }
               scope.characters.push( zKillInfo );
               console.log( zKillInfo );
 
