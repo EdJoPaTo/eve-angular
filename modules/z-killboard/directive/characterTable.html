@@ -1,49 +1,62 @@
-<table class="table table-header-rotated table-condensed">
-  <thead>
-    <tr>
+<div class="table-responsive">
+  <table class="table table-header-rotated table-condensed">
+    <thead>
+      <tr>
+        <th>
+          Player
+        </th>
+        <th class="rotate">
+          <div>
+            Success
+          </div>
+        </th>
+        <th class="rotate">
+          <div>
+            ISK
+          </div>
+        </th>
+        <th ng-repeat="id in groups | orderBy" class="rotate">
+          <div>
+            {{ groupName[id] || id }}
+          </div>
+        </th>
+        <th class="text-right">
+          Player
+        </th>
+      </tr>
+    </thead>
+    <tr ng-repeat="character in characters | orderBy: '-iskDestroyed'">
       <th>
-        Player
+        <a ng-href="//zKillboard.com/character/{{ character.id }}/" target="_blank">
+          {{ character.info.name }}
+        </a>
       </th>
-      <th class="rotate">
-        <div>
-          Success
-        </div>
-      </th>
-      <th class="rotate">
-        <div>
-          ISK
-        </div>
-      </th>
-      <th ng-repeat="id in groups | orderBy" class="rotate">
-        <div>
-          {{ groupName[id] || id }}
-        </div>
+      <td ng-class="{ success: characterSuccessRate(character) > 0.5, danger: characterSuccessRate(character) < 0.5 }">
+        {{ characterSuccessRate(character) * 100 | number : 1 }}
+        %
+      </td>
+      <td character-table-isk-cell object="character"></td>
+      <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
+      <th class="text-right">
+        <a ng-href="//zKillboard.com/character/{{ character.id }}/" target="_blank">
+          {{ character.info.name }}
+        </a>
       </th>
     </tr>
-  </thead>
-  <tr ng-repeat="character in characters | orderBy: '-iskDestroyed'">
-    <th>
-      <a ng-href="//zKillboard.com/character/{{ character.id }}/" target="_blank">
+    <tr ng-repeat="character in noInfoCharacters">
+      <th>
         {{ character.info.name }}
-      </a>
-    </th>
-    <td ng-class="{ success: characterSuccessRate(character) > 0.5, danger: characterSuccessRate(character) < 0.5 }">
-      {{ characterSuccessRate(character) * 100 | number : 1 }}
-      %
-    </td>
-    <td character-table-isk-cell object="character"></td>
-    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
-  </tr>
-  <tr ng-repeat="character in noInfoCharacters">
-    <th>
-      {{ character.info.name }}
-    </th>
-    <td>
-      ?
-    </td>
-    <td>
-      ?
-    </td>
-    <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
-  </tr>
-</table>
+      </th>
+      <td>
+        ?
+      </td>
+      <td>
+        ?
+      </td>
+      <td ng-repeat="groupId in groups | orderBy" character-table-isk-cell object="character.groups[groupId]"></td>
+      <th class="text-right">
+        {{ character.info.name }}
+      </th>
+    </tr>
+  </table>
+</div>
