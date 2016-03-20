@@ -33,6 +33,8 @@ angular.module( 'z-killboard' )
                 scope.noInfoCharacters.push( zKillInfo );
                 return;
               }
+
+              if (!zKillInfo.iskDestroyed) zKillInfo.iskDestroyed = 0;
               scope.characters.push( zKillInfo );
               console.log( zKillInfo );
 
