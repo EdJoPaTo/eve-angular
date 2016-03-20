@@ -12,6 +12,12 @@
   {{ item.name }}
 </h1>
 {{ html(item.description) }}
+<h3>Market Look</h3>
+<a ng-href="https://eve-central.com/home/quicklook.html?typeid={{ item.id }}" target="_blank">EVE Central</a><br/>
+<a ng-href="https://www.fuzzwork.co.uk/market/viewer/?typeid={{ item.id }}&region={{ region.name }}" target="_blank">Fuzzwork Market Browser</a>
+in Region
+<span region-selector region-id="regionId"></span>
+<h3>General</h3>
 <table>
   <tr ng-repeat="(key, value) in stringOnly(item)">
     <td>

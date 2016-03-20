@@ -1,5 +1,5 @@
 angular.module( 'eve' )
-  .directive( 'itemTypeInfo', function( typeInfoService, typeIconUrlService, typeRenderUrlService ) {
+  .directive( 'itemTypeInfo', function( typeInfoService, crestRegionsService, typeIconUrlService, typeRenderUrlService ) {
     return {
       scope: {
         itemId: "="
@@ -13,6 +13,16 @@ angular.module( 'eve' )
             if ( typeInfo.id != $scope.itemId ) return;
             $scope.item = typeInfo;
           } );
+        } );
+
+        $scope.region = {};
+        $scope.$watch( 'regionId', function( newValue, oldValue ) {
+          if ( newValue === oldValue ) return;
+          if ( !newValue ) return;
+          crestRegionsService.getSpecific( newValue )
+            .then( regionData => {
+              $scope.region = regionData;
+            } );
         } );
 
         $scope.html = function( text ) {
