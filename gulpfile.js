@@ -84,7 +84,7 @@ gulp.task( 'styles', function() {
     .pipe( concat( 'styles.min.css' ) )
     .pipe( sass( {
       outputStyle: 'compressed'
-    } ).on( 'error', sass.logError ) )
+    } ) )
     .pipe( sourcemaps.write( '.' ) )
     .pipe( gulp.dest( paths.out.styles ) );
   gulp.src( paths.in.stylethemes )
