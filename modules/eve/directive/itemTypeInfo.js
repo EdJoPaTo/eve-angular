@@ -1,5 +1,5 @@
 angular.module( 'eve' )
-  .directive( 'itemTypeInfo', function( typeInfoService, crestRegionsService, typeIconUrlService, typeRenderUrlService ) {
+  .directive( 'itemTypeInfo', function( typeInfoService, crestRegionsService, crestMarketService, typeIconUrlService, typeRenderUrlService ) {
     return {
       scope: {
         itemId: "="
@@ -23,6 +23,23 @@ angular.module( 'eve' )
             .then( regionData => {
               $scope.region = regionData;
             } );
+        } );
+
+        function getBestPrice( pricetype ) {
+          if ( !$scope.regionId ) return;
+          if ( !$scope.itemId ) return;
+          crestMarketService.getBestPrice( $scope.regionId, $scope.itemId, pricetype )
+            .then( function( price ) {
+              $scope.price[pricetype] = price;
+            } );
+        }
+
+        $scope.$watchGroup( [ 'itemId', 'regionId' ], function( newValues, oldValues ) {
+          if ( newValues === oldValues ) return;
+          $scope.price = {};
+
+          getBestPrice( 'buy' );
+          getBestPrice( 'sell' );
         } );
 
         $scope.html = function( text ) {
