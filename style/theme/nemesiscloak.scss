@@ -1,0 +1,21 @@
+@media (min-width:768px) {
+  body {
+    background-image: url(/resources/backgrounds/nemesiscloak.jpg);
+  }
+
+  $basecolor: #cdcaa0;
+  $highlightcolor: white;
+
+  h1, h2, h3, h4, h5, h6, strong, a, a:active, a:hover, a:focus, a:visited {
+    color: $basecolor;
+  }
+
+  .navbar-inverse .navbar-nav > li > a:hover {
+    background-color: $highlightcolor;
+  }
+
+  a:hover {
+    color: $highlightcolor;
+    filter: drop-shadow(0px 0px 5px $highlightcolor);
+  }
+}
