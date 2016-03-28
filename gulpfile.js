@@ -57,7 +57,7 @@ gulp.src = function() {
     } ) );
 };
 
-gulp.task( 'connect', function() {
+gulp.task( 'connect', [ 'build' ], function() {
   return connect.server( {
     root: 'public',
     livereload: true
@@ -137,7 +137,7 @@ gulp.task( 'resources:backgrounds', function() {
     .pipe( gulp.dest( paths.out.resources.backgrounds ) );
 } );
 
-gulp.task( 'watch', function() {
+gulp.task( 'watch', [ 'build' ], function() {
   watch( paths.in.indexhtml, function() {
     return gulp.start( 'html:index' );
   } );
@@ -169,14 +169,16 @@ gulp.task( 'clean', function() {
   ] );
 } );
 
-gulp.task( 'release', [ 'default' ], function() {
-  //TODO: clean before default (wait for gulp4)
+gulp.task( 'release', [ 'build' ], function() {
+  //TODO: clean before build (wait for gulp4)
   return gulp.src( paths.in.release )
     .pipe( tar( 'public.tar' ) )
     .pipe( gzip() )
     .pipe( gulp.dest( paths.out.release ) );
 } );
 
-gulp.task( 'default', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds' ] );
+gulp.task( 'build', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds' ] );
 
-gulp.task( 'dev', [ 'default', 'connect', 'watch' ] );
+gulp.task( 'default', [ 'build' ] );
+
+gulp.task( 'dev', [ 'connect', 'watch' ] );
