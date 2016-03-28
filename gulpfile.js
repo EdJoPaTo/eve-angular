@@ -1,5 +1,6 @@
 var babel = require( 'gulp-babel' );
 var concat = require( 'gulp-concat' );
+var connect = require( 'gulp-connect' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
 var minifyHtml = require( 'gulp-minify-html' );
@@ -7,6 +8,7 @@ var plumber = require( 'gulp-plumber' );
 var sass = require( 'gulp-sass' );
 var sourcemaps = require( 'gulp-sourcemaps' );
 var uglify = require( 'gulp-uglify' );
+var watch = require( 'gulp-watch' );
 
 var paths = { in : {
     angular: [
@@ -14,20 +16,20 @@ var paths = { in : {
       'bower_components/angular-route/angular-route.min.js'
     ],
     indexhtml: 'modules/index.html',
-    templates: 'modules/**/*.html',
     scripts: [
       'modules/*/app.js',
       'modules/**/*.js'
     ],
     styles: 'style/*.scss',
-    stylethemes: 'style/theme/*.scss'
+    stylethemes: 'style/theme/*.scss',
+    templates: 'modules/**/*.html'
   },
   out: {
     indexhtml: 'public/',
-    templates: 'public/',
     scripts: 'public/js',
     styles: 'public/style',
-    stylethemes: 'public/style/theme'
+    stylethemes: 'public/style/theme',
+    templates: 'public/'
   }
 };
 
@@ -44,7 +46,6 @@ gulp.src = function() {
 };
 
 gulp.task( 'connect', function() {
-  var connect = require( 'gulp-connect' );
   connect.server( {
     root: 'public',
     livereload: true
@@ -97,7 +98,6 @@ gulp.task( 'styles', function() {
 } );
 
 gulp.task( 'watch', function() {
-  var watch = require( 'gulp-watch' );
   watch( 'modules/**/*.html', function() {
     gulp.start( 'templates' );
   } );
@@ -108,7 +108,6 @@ gulp.task( 'watch', function() {
     gulp.start( 'styles' );
   } );
   watch( 'public/**/*.*', function() {
-    var connect = require( 'gulp-connect' );
     gulp.src( 'public/**/*.*' )
       .pipe( connect.reload() );
   } );
