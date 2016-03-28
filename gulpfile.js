@@ -5,6 +5,7 @@ var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
 var minifyHtml = require( 'gulp-minify-html' );
 var plumber = require( 'gulp-plumber' );
+var responsive = require( 'gulp-responsive' );
 var sass = require( 'gulp-sass' );
 var sourcemaps = require( 'gulp-sourcemaps' );
 var uglify = require( 'gulp-uglify' );
@@ -16,6 +17,9 @@ var paths = { in : {
       'bower_components/angular-route/angular-route.min.js'
     ],
     indexhtml: 'modules/index.html',
+    resources: {
+      backgrounds: 'resources/backgrounds/**/*'
+    },
     scripts: [
       'modules/*/app.js',
       'modules/**/*.js'
@@ -26,6 +30,9 @@ var paths = { in : {
   },
   out: {
     indexhtml: 'public/',
+    resources: {
+      backgrounds: 'public/resources/backgrounds/'
+    },
     scripts: 'public/js',
     styles: 'public/style',
     stylethemes: 'public/style/theme',
@@ -46,14 +53,14 @@ gulp.src = function() {
 };
 
 gulp.task( 'connect', function() {
-  connect.server( {
+  return connect.server( {
     root: 'public',
     livereload: true
   } );
 } );
 
 gulp.task( 'angular', function() {
-  gulp.src( paths.in.angular )
+  return gulp.src( paths.in.angular )
     .pipe( concat( 'angular.min.js' ) )
     .pipe( gulp.dest( paths.out.scripts ) );
 } );
@@ -62,13 +69,13 @@ gulp.task( 'templates', function() {
   gulp.src( paths.in.indexhtml )
     .pipe( minifyHtml() )
     .pipe( gulp.dest( paths.out.indexhtml ) );
-  gulp.src( paths.in.templates )
+  return gulp.src( paths.in.templates )
     .pipe( minifyHtml() )
     .pipe( gulp.dest( paths.out.templates ) );
 } );
 
 gulp.task( 'scripts', function() {
-  gulp.src( paths.in.scripts )
+  return gulp.src( paths.in.scripts )
     .pipe( sourcemaps.init() )
     .pipe( babel() )
     .pipe( concat( 'scripts.min.js' ) )
@@ -97,22 +104,48 @@ gulp.task( 'styles', function() {
     .pipe( gulp.dest( paths.out.stylethemes ) );
 } );
 
+gulp.task( 'resources:backgrounds', function() {
+  return gulp.src( paths.in.resources.backgrounds )
+    .pipe( responsive( {
+      '*.png': {
+        format: 'jpeg',
+        rename: {
+          extname: '.jpg'
+        },
+        height: 1000,
+        withoutEnlargement: true
+      }
+    }, {
+      quality: 90,
+      // Use progressive (interlace) scan for JPEG and PNG output. This typically reduces compression performance by 30% but results in an image that can be rendered sooner when decompressed.
+      progressive: true,
+      compressionLevel: 9,
+      withMetadata: false,
+      silent: true,
+      stats: false
+    } ) )
+    .pipe( gulp.dest( paths.out.resources.backgrounds ) );
+} );
+
 gulp.task( 'watch', function() {
   watch( 'modules/**/*.html', function() {
-    gulp.start( 'templates' );
+    return gulp.start( 'templates' );
   } );
   watch( 'modules/**/*.js', function() {
-    gulp.start( 'scripts' );
+    return gulp.start( 'scripts' );
   } );
   watch( 'style/**/*.*', function() {
-    gulp.start( 'styles' );
+    return gulp.start( 'styles' );
+  } );
+  watch( paths.in.resources.backgrounds, function() {
+    return gulp.start( 'resources:backgrounds' );
   } );
   watch( 'public/**/*.*', function() {
-    gulp.src( 'public/**/*.*' )
+    return gulp.src( 'public/**/*.*' )
       .pipe( connect.reload() );
   } );
 } );
 
-gulp.task( 'default', [ 'angular', 'templates', 'scripts', 'styles' ] );
+gulp.task( 'default', [ 'angular', 'templates', 'scripts', 'styles', 'resources:backgrounds' ] );
 
 gulp.task( 'dev', [ 'default', 'connect', 'watch' ] );

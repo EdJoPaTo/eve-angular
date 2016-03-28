@@ -1,9 +1,3 @@
 node_modules
 bower_components
-public/js/
-public/eve/
-public/eve-estimator/
-public/general/
-public/z-killboard/
-public/style/
-public/index.html
+/public/
