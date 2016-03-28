@@ -1,13 +1,13 @@
 {
-  "name": "eve-angular",
-  "private": true,
+  "dependencies": {
+    "angular": "~1.5.3",
+    "angular-route": "~1.5.3"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
     "components"
   ],
-  "dependencies": {
-    "angular": "~1.5.1",
-    "angular-route": "~1.5.1"
-  }
+  "name": "eve-angular",
+  "version": "1.0.0-alpha1"
 }
