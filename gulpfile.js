@@ -65,10 +65,12 @@ gulp.task( 'angular', function() {
     .pipe( gulp.dest( paths.out.scripts ) );
 } );
 
-gulp.task( 'templates', function() {
-  gulp.src( paths.in.indexhtml )
+gulp.task( 'html:index', function() {
+  return gulp.src( paths.in.indexhtml )
     .pipe( minifyHtml() )
     .pipe( gulp.dest( paths.out.indexhtml ) );
+} );
+gulp.task( 'html:templates', function() {
   return gulp.src( paths.in.templates )
     .pipe( minifyHtml() )
     .pipe( gulp.dest( paths.out.templates ) );
@@ -87,7 +89,7 @@ gulp.task( 'scripts', function() {
 } );
 
 gulp.task( 'styles', function() {
-  gulp.src( paths.in.styles )
+  return gulp.src( paths.in.styles )
     .pipe( sourcemaps.init() )
     .pipe( concat( 'styles.min.css' ) )
     .pipe( sass( {
@@ -95,7 +97,10 @@ gulp.task( 'styles', function() {
     } ) )
     .pipe( sourcemaps.write( '.' ) )
     .pipe( gulp.dest( paths.out.styles ) );
-  gulp.src( paths.in.stylethemes )
+} );
+
+gulp.task( 'styles:themes', function() {
+  return gulp.src( paths.in.stylethemes )
     .pipe( sourcemaps.init() )
     .pipe( sass( {
       outputStyle: 'compressed'
@@ -128,14 +133,20 @@ gulp.task( 'resources:backgrounds', function() {
 } );
 
 gulp.task( 'watch', function() {
-  watch( 'modules/**/*.html', function() {
-    return gulp.start( 'templates' );
+  watch( paths.in.indexhtml, function() {
+    return gulp.start( 'html:index' );
   } );
-  watch( 'modules/**/*.js', function() {
+  watch( paths.in.templates, function() {
+    return gulp.start( 'html:templates' );
+  } );
+  watch( paths.in.scripts, function() {
     return gulp.start( 'scripts' );
   } );
-  watch( 'style/**/*.*', function() {
+  watch( paths.in.styles, function() {
     return gulp.start( 'styles' );
+  } );
+  watch( paths.in.stylethemes, function() {
+    return gulp.start( 'styles:themes' );
   } );
   watch( paths.in.resources.backgrounds, function() {
     return gulp.start( 'resources:backgrounds' );
@@ -146,6 +157,6 @@ gulp.task( 'watch', function() {
   } );
 } );
 
-gulp.task( 'default', [ 'angular', 'templates', 'scripts', 'styles', 'resources:backgrounds' ] );
+gulp.task( 'default', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds' ] );
 
 gulp.task( 'dev', [ 'default', 'connect', 'watch' ] );
