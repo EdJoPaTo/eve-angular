@@ -1,13 +1,16 @@
 var babel = require( 'gulp-babel' );
 var concat = require( 'gulp-concat' );
 var connect = require( 'gulp-connect' );
+var del = require( 'del' );
 var gulp = require( 'gulp' );
 var gutil = require( 'gulp-util' );
+var gzip = require( 'gulp-gzip' );
 var minifyHtml = require( 'gulp-minify-html' );
 var plumber = require( 'gulp-plumber' );
 var responsive = require( 'gulp-responsive' );
 var sass = require( 'gulp-sass' );
 var sourcemaps = require( 'gulp-sourcemaps' );
+var tar = require( 'gulp-tar' );
 var uglify = require( 'gulp-uglify' );
 var watch = require( 'gulp-watch' );
 
@@ -17,6 +20,7 @@ var paths = { in : {
       'bower_components/angular-route/angular-route.min.js'
     ],
     indexhtml: 'modules/index.html',
+    release: 'public/**/*',
     resources: {
       backgrounds: 'resources/backgrounds/**/*'
     },
@@ -30,6 +34,7 @@ var paths = { in : {
   },
   out: {
     indexhtml: 'public/',
+    release: 'release/',
     resources: {
       backgrounds: 'public/resources/backgrounds/'
     },
@@ -155,6 +160,21 @@ gulp.task( 'watch', function() {
     return gulp.src( 'public/**/*.*' )
       .pipe( connect.reload() );
   } );
+} );
+
+gulp.task( 'clean', function() {
+  return del( [
+    paths.out.release,
+    paths.in.release,
+  ] );
+} );
+
+gulp.task( 'release', [ 'default' ], function() {
+  //TODO: clean before default (wait for gulp4)
+  return gulp.src( paths.in.release )
+    .pipe( tar( 'public.tar' ) )
+    .pipe( gzip() )
+    .pipe( gulp.dest( paths.out.release ) );
 } );
 
 gulp.task( 'default', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds' ] );
