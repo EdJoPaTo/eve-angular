@@ -1,5 +1,9 @@
 angular.module('eve')
 .controller('miningCtrl', function ($scope, $routeParams, $location, $route) {
+  $scope.miner = 1;
+  $scope.volume = 1000;
+  $scope.cycletime = 60;
+
   $scope.pricetype = $routeParams.pricetype;
   $scope.$watch('pricetype', function(newValue, oldValue){
     if (oldValue == newValue) return;

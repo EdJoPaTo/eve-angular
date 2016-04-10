@@ -3,6 +3,8 @@
 <input type="search" ng-model="filter" placeholder="Search...">
 
 <h2>Raw Materials</h2>
+one cycle of {{ miner | number: 0 }} Miner{{ miner > 1 ? "s" : "" }}, each with {{ volume | volume }} per cycle
+<mining-table pricetype="pricetype" kind="kind" filter="filter" editmode="editmode" region="10000002" volume="miner * volume"></mining-table>
 
 <div ng-show="showmineraltable(kind)">
   <h2>Minerals</h2>
@@ -21,4 +23,15 @@
   <option value="whgas">Unknown Space Gas Clouds</option>
   <option value="all">All of it!</option>
 </select><br>
+
+Miner:
+<input type="number" ng-model="miner" min="1" max="8" step="1">x
+<input type="number" ng-model="volume" min="1" max="4000" step="1">m³
+= {{ miner * volume | volume: 0 }}
+<br>
+Cycletime:
+<input type="number" ng-model="cycletime" min="5" max="300" step="1">
+Seconds
+<br>
+
 <input type="checkbox" ng-model="editmode"> Show Custom Calculations<br>

@@ -1,0 +1,40 @@
+<div class="table-responsive">
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>
+        Found in
+      </th>
+      <th class="text-right" ng-show="editmode">
+        1 Item
+        <br />
+        ISK
+      </th>
+      <th class="text-right">
+        Quantity
+        <br />
+        Amount
+      </th>
+      <th class="text-right">
+        normal
+        <br />
+        ISK
+      </th>
+      <th class="text-right">
+        reprocessed
+        <br />
+        ISK
+      </th>
+      <th class="text-right">
+        compressed
+        <br />
+        ISK
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mining-table-entry ng-repeat="mat in rawmaterial | filter: filter" pricetype="pricetype" item="mat" region="region" editmode="editmode" volume="volume"></tr>
+  </tbody>
+</table>
+</div>

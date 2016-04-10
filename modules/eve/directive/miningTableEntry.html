@@ -1,0 +1,15 @@
+<th style="background-image: url({{ icon(item.id) }});" class="icon-background">
+  {{ item.name }}
+</th>
+<td>
+  Security
+</td>
+<td ng-show="editmode">
+  <input type="number" ng-model="singleprice" min="0.01" max="10000000" step="0.01">
+</td>
+<td class="text-right">
+  {{ amount | number: 0 }}
+</td>
+<td class="text-right">
+  {{ singleprice * amount | isk }}
+</td>
