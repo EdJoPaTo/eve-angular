@@ -22,7 +22,8 @@ var paths = { in : {
     indexhtml: 'modules/index.html',
     release: 'public/**/*',
     resources: {
-      backgrounds: 'resources/backgrounds/**/*'
+      backgrounds: 'resources/backgrounds/**/*',
+      evedump: 'resources/evedump/**/*.json'
     },
     scripts: [
       'modules/*/app.js',
@@ -36,7 +37,8 @@ var paths = { in : {
     indexhtml: 'public/',
     release: 'release/',
     resources: {
-      backgrounds: 'public/resources/backgrounds/'
+      backgrounds: 'public/resources/backgrounds/',
+      evedump: 'public/resources/evedump/'
     },
     scripts: 'public/js',
     styles: 'public/style',
@@ -137,6 +139,11 @@ gulp.task( 'resources:backgrounds', function() {
     .pipe( gulp.dest( paths.out.resources.backgrounds ) );
 } );
 
+gulp.task( 'resources:evedump', function() {
+  return gulp.src( paths.in.resources.evedump )
+    .pipe( gulp.dest( paths.out.resources.evedump ) );
+} );
+
 gulp.task( 'watch', [ 'build' ], function() {
   watch( paths.in.indexhtml, function() {
     return gulp.start( 'html:index' );
@@ -155,6 +162,9 @@ gulp.task( 'watch', [ 'build' ], function() {
   } );
   watch( paths.in.resources.backgrounds, function() {
     return gulp.start( 'resources:backgrounds' );
+  } );
+  watch( paths.in.resources.evedump, function() {
+    return gulp.start( 'resources:evedump' );
   } );
   watch( 'public/**/*.*', function() {
     return gulp.src( 'public/**/*.*' )
@@ -177,7 +187,7 @@ gulp.task( 'release', [ 'build' ], function() {
     .pipe( gulp.dest( paths.out.release ) );
 } );
 
-gulp.task( 'build', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds' ] );
+gulp.task( 'build', [ 'angular', 'html:index', 'html:templates', 'scripts', 'styles', 'styles:themes', 'resources:backgrounds', 'resources:evedump' ] );
 
 gulp.task( 'default', [ 'build' ] );
 
