@@ -26,4 +26,10 @@ angular.module('eve')
     }
   });
 
+  $scope.showmineraltable = function (kind) {
+    if (kind == "gas" || kind == "whgas") {
+      return false;
+    }
+    return true;
+  };
 });

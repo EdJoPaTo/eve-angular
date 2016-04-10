@@ -2,8 +2,14 @@
 
 <input type="search" ng-model="filter" placeholder="Search...">
 
-<mineral-table pricetype="pricetype" kind="kind" filter="filter" editmode="editmode"></mineral-table>
+<h2>Raw Materials</h2>
 
+<div ng-show="showmineraltable(kind)">
+  <h2>Minerals</h2>
+  <mineral-table pricetype="pricetype" kind="kind" filter="filter" editmode="editmode"></mineral-table>
+</div>
+
+<h2>Options (Work in Progress)</h2>
 <select ng-model="pricetype">
   <option value="buy">Accept Buy Order</option>
   <option value="sell">Place Sell Order</option>

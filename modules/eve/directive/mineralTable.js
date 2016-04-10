@@ -30,12 +30,6 @@ angular.module('eve')
       if (scope.kind === 'ice' || scope.kind === 'all') {
         loadMarketGroup(1033);
       }
-      if (scope.kind === 'gas' || scope.kind === 'all') {
-        loadMarketGroup(983);
-      }
-      if (scope.kind === 'whgas' || scope.kind === 'all') {
-        loadMarketGroup(1859);
-      }
     }
   };
 });
