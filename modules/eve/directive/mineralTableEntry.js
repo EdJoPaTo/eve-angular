@@ -1,5 +1,5 @@
 angular.module('eve')
-.directive( 'mineralTableEntry', function( crestMarketService ) {
+.directive( 'mineralTableEntry', function( crestMarketService, typeIconUrlService ) {
   return {
     restrict: "A",
     scope: {
@@ -41,9 +41,7 @@ angular.module('eve')
         return price === Math.min.apply(null, allPrices);
       };
 
-      scope.icon = function (id) {
-        return id ? "//image.eveonline.com/Type/" + id + "_64.png" : "";
-      };
+      scope.icon = typeIconUrlService;
     }
   };
 });
